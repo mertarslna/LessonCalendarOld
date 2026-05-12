@@ -3,12 +3,23 @@
  * Author: Antigravity
  */
 
+const DEFAULT_EXAMS = [
+    { id: 101, name: "Medeni Usul Hukuku", date: "2026-05-16", time: "16:00" },
+    { id: 102, name: "Şirketler Hukuku", date: "2026-05-17", time: "10:00" },
+    { id: 103, name: "Ceza Hukuku (Özel)", date: "2026-05-18", time: "15:00" },
+    { id: 104, name: "Borçlar Hukuku (Özel)", date: "2026-05-20", time: "15:00" },
+    { id: 105, name: "KKTC Şahadet Hukuku", date: "2026-05-21", time: "13:00" },
+    { id: 106, name: "Eşya Hukuku", date: "2026-05-22", time: "17:00" },
+    { id: 107, name: "Hukuk Sosyolojisi", date: "2026-05-23", time: "14:00" },
+    { id: 108, name: "Antalya Yolculuğu", date: "2026-05-26", time: "13:40" }
+];
+
 const ExamApp = {
     exams: [],
-    
+
     async init() {
         this.cacheDOM();
-        await this.loadExams();
+        this.loadExams();
         this.bindEvents();
         this.render();
         this.startTimers();
@@ -22,7 +33,7 @@ const ExamApp = {
         this.container = document.getElementById('exams-container');
         this.countBadge = document.getElementById('exam-count');
         this.noExamsMsg = document.getElementById('no-exams');
-        
+
         // Navigation
         this.views = document.querySelectorAll('.view');
         this.navItems = document.querySelectorAll('.nav-item');
@@ -31,7 +42,7 @@ const ExamApp = {
     bindEvents() {
         this.form.addEventListener('submit', (e) => this.handleAddExam(e));
         this.container.addEventListener('click', (e) => this.handleDelete(e));
-        
+
         // View switching
         this.navItems.forEach(item => {
             item.addEventListener('click', () => this.switchView(item.dataset.view));
@@ -72,27 +83,20 @@ const ExamApp = {
         }
     },
 
-    async loadExams() {
+    loadExams() {
         // 1. Get from LocalStorage
         const saved = localStorage.getItem('exam_calendar_data');
         let localExams = saved ? JSON.parse(saved) : [];
 
-        // 2. Try to fetch from data.json (Default exams)
-        try {
-            const response = await fetch('data.json');
-            if (response.ok) {
-                const defaultExams = await response.json();
-                
-                // Merge if ID doesn't exist
-                defaultExams.forEach(defExam => {
-                    if (!localExams.some(local => local.id === defExam.id)) {
-                        localExams.push(defExam);
-                    }
+        // 2. Add default exams if they don't exist
+        DEFAULT_EXAMS.forEach(defExam => {
+            if (!localExams.some(local => local.id === defExam.id || (local.name === defExam.name && local.date === defExam.date))) {
+                localExams.push({
+                    ...defExam,
+                    createdAt: new Date().toISOString()
                 });
             }
-        } catch (error) {
-            console.warn('data.json could not be loaded, using local data only.');
-        }
+        });
 
         this.exams = localExams;
         this.sortExams();
@@ -124,7 +128,7 @@ const ExamApp = {
         this.saveExams();
         this.render();
         this.form.reset();
-        
+
         // Return to list view
         this.switchView('list-view');
     },
@@ -181,20 +185,20 @@ const ExamApp = {
             const card = this.createExamCard(exam);
             this.container.appendChild(card);
         });
-        
+
         this.updateBadge();
     },
 
     createExamCard(exam) {
         const examDate = new Date(`${exam.date}T${exam.time}`);
         const countdown = this.calculateCountdown(examDate);
-        
+
         const card = document.createElement('div');
         card.className = `exam-card ${countdown.status === 'urgent' ? 'urgent' : ''} ${countdown.status === 'passed' ? 'passed' : ''}`;
         card.dataset.id = exam.id;
 
-        const formattedDate = new Intl.DateTimeFormat('tr-TR', { 
-            day: 'numeric', month: 'long', year: 'numeric' 
+        const formattedDate = new Intl.DateTimeFormat('tr-TR', {
+            day: 'numeric', month: 'long', year: 'numeric'
         }).format(examDate);
 
         let countdownHTML = '';
