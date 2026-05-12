@@ -36,6 +36,25 @@ const ExamApp = {
         this.navItems.forEach(item => {
             item.addEventListener('click', () => this.switchView(item.dataset.view));
         });
+
+        // Scroll hiding logic for bottom nav
+        this.initScrollHiding();
+    },
+
+    initScrollHiding() {
+        const nav = document.querySelector('.bottom-nav');
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                // Scrolling down
+                nav.classList.add('nav-hidden');
+            } else {
+                // Scrolling up
+                nav.classList.remove('nav-hidden');
+            }
+            lastScrollY = window.scrollY;
+        }, { passive: true });
     },
 
     switchView(viewId) {
