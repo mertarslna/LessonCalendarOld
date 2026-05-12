@@ -6,7 +6,8 @@ const DEFAULT_EXAMS = [
     { id: 105, name: "KKTC Şahadet Hukuku", date: "2026-05-21", time: "13:00" },
     { id: 106, name: "Eşya Hukuku", date: "2026-05-22", time: "17:00" },
     { id: 107, name: "Hukuk Sosyolojisi", date: "2026-05-23", time: "14:00" },
-    { id: 108, name: "Antalya Yolculuğu", date: "2026-05-26", time: "13:40" }
+    { id: 108, name: "Antalya Yolculuğu", date: "2026-05-26", time: "13:40" },
+    { id: 109, name: "Fikri Sinai Mülkiyet", date: "2026-05-24", time: "00:00" }
 ];
 
 const ExamApp = {
