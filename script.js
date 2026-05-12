@@ -8,7 +8,6 @@ const DEFAULT_EXAMS = [
     { id: 107, name: "Hukuk Sosyolojisi", date: "2026-05-23", time: "14:00" },
     { id: 108, name: "Antalya Yolculuğu", date: "2026-05-26", time: "13:40" },
     { id: 109, name: "Fikri Sinai Mülkiyet", date: "2026-05-24", time: "00:00" },
-    { id: 110, name: "Deneme Hukuku", date: "2026-05-25", time: "00:00" },
 ];
 
 const ExamApp = {
