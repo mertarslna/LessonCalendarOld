@@ -80,27 +80,35 @@ const ExamApp = {
     },
 
     loadExams() {
-        // Change key to v3 to force a fresh start
-        const saved = localStorage.getItem('exam_calendar_v3');
+        // Stable key for long-term use
+        const STORAGE_KEY = 'exam_calendar_main';
+        const saved = localStorage.getItem(STORAGE_KEY);
         let localExams = saved ? JSON.parse(saved) : [];
 
-        // 2. Add default exams if they don't exist
+        // Always check for missing default exams and add them
+        let updated = false;
         DEFAULT_EXAMS.forEach(defExam => {
-            if (!localExams.some(local => local.id === defExam.id)) {
+            const exists = localExams.some(local => local.id === defExam.id);
+            if (!exists) {
                 localExams.push({
                     ...defExam,
                     createdAt: new Date().toISOString()
                 });
+                updated = true;
             }
         });
 
         this.exams = localExams;
         this.sortExams();
-        this.saveExams();
+
+        // Only save if we actually updated something or it was empty
+        if (updated || !saved) {
+            this.saveExams();
+        }
     },
 
     saveExams() {
-        localStorage.setItem('exam_calendar_v3', JSON.stringify(this.exams));
+        localStorage.setItem('exam_calendar_main', JSON.stringify(this.exams));
         this.updateBadge();
     },
 
