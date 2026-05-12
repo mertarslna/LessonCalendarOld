@@ -477,8 +477,9 @@ input:focus {
     }
 
     .form-row {
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+        grid-template-columns: 1fr;
+        /* Stacked for better mobile alignment */
+        gap: 1.25rem;
     }
 
     .exams-grid {
