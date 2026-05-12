@@ -27,44 +27,64 @@
             <p class="subtitle">Sınavlarınızı planlayın ve geri sayımı takip edin.</p>
         </header>
 
-        <section class="add-exam-section">
-            <div class="glass-card">
-                <form id="exam-form" class="exam-form">
-                    <div class="form-group">
-                        <label for="exam-name">Sınav Adı</label>
-                        <input type="text" id="exam-name" placeholder="Örn: Matematik Vize" required>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="exam-date">Tarih</label>
-                            <input type="date" id="exam-date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="exam-time">Saat</label>
-                            <input type="time" id="exam-time" required>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn-primary">
-                        <span class="btn-text">Sınav Ekle</span>
-                        <span class="btn-icon">+</span>
-                    </button>
-                </form>
-            </div>
-        </section>
-
-        <section class="exams-list-section">
-            <div class="section-header">
-                <h2 class="section-title">Yaklaşan Sınavlar</h2>
-                <div id="exam-count" class="badge">0 Sınav</div>
-            </div>
-            <div id="exams-container" class="exams-grid">
-                <!-- Sınav kartları buraya gelecek -->
-                <div id="no-exams" class="empty-state">
-                    <p>Henüz eklenmiş bir sınav bulunmuyor.</p>
+        <!-- Views Container -->
+        <div class="views-wrapper">
+            <!-- List View -->
+            <section id="list-view" class="view active">
+                <div class="section-header">
+                    <h2 class="section-title">Yaklaşan Sınavlar</h2>
+                    <div id="exam-count" class="badge">0 Sınav</div>
                 </div>
-            </div>
-        </section>
+                <div id="exams-container" class="exams-grid">
+                    <!-- Sınav kartları buraya gelecek -->
+                    <div id="no-exams" class="empty-state">
+                        <p>Henüz eklenmiş bir sınav bulunmuyor.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add View -->
+            <section id="add-view" class="view">
+                <div class="section-header">
+                    <h2 class="section-title">Yeni Sınav Ekle</h2>
+                </div>
+                <div class="glass-card">
+                    <form id="exam-form" class="exam-form">
+                        <div class="form-group">
+                            <label for="exam-name">Sınav Adı</label>
+                            <input type="text" id="exam-name" placeholder="Örn: Matematik Vize" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="exam-date">Tarih</label>
+                                <input type="date" id="exam-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exam-time">Saat</label>
+                                <input type="time" id="exam-time" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <span class="btn-text">Sınavı Kaydet</span>
+                            <span class="btn-icon">✓</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
     </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" data-view="list-view">
+            <span class="nav-icon">📅</span>
+            <span class="nav-label">Sınavlarım</span>
+        </button>
+        <button class="nav-item" data-view="add-view">
+            <span class="nav-icon">➕</span>
+            <span class="nav-label">Sınav Ekle</span>
+        </button>
+    </nav>
 
     <script src="script.js"></script>
 </body>

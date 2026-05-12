@@ -22,11 +22,37 @@ const ExamApp = {
         this.container = document.getElementById('exams-container');
         this.countBadge = document.getElementById('exam-count');
         this.noExamsMsg = document.getElementById('no-exams');
+        
+        // Navigation
+        this.views = document.querySelectorAll('.view');
+        this.navItems = document.querySelectorAll('.nav-item');
     },
 
     bindEvents() {
         this.form.addEventListener('submit', (e) => this.handleAddExam(e));
         this.container.addEventListener('click', (e) => this.handleDelete(e));
+        
+        // View switching
+        this.navItems.forEach(item => {
+            item.addEventListener('click', () => this.switchView(item.dataset.view));
+        });
+    },
+
+    switchView(viewId) {
+        // Update views
+        this.views.forEach(view => {
+            view.classList.toggle('active', view.id === viewId);
+        });
+
+        // Update nav items
+        this.navItems.forEach(item => {
+            item.classList.toggle('active', item.dataset.view === viewId);
+        });
+
+        // If switching to list, re-render to update countdowns
+        if (viewId === 'list-view') {
+            this.render();
+        }
     },
 
     loadExams() {
@@ -62,8 +88,8 @@ const ExamApp = {
         this.render();
         this.form.reset();
         
-        // Focus back to name input for better UX
-        this.nameInput.focus();
+        // Return to list view
+        this.switchView('list-view');
     },
 
     handleDelete(e) {
