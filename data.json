@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1715529773001,
+        "name": "Medeni Usul Hukuku",
+        "date": "2026-05-16",
+        "time": "16:00",
+        "createdAt": "2026-05-12T19:02:53Z"
+    },
+    {
+        "id": 1715529773002,
+        "name": "Şirketler Hukuku",
+        "date": "2026-05-17",
+        "time": "10:00",
+        "createdAt": "2026-05-12T19:02:53Z"
+    },
+    {
+        "id": 1715529773003,
+        "name": "Ceza Hukuku (Özel)",
+        "date": "2026-05-18",
+        "time": "15:00",
+        "createdAt": "2026-05-12T19:02:53Z"
+    },
+    {
+        "id": 1715529773004,
+        "name": "Borçlar Hukuku (Özel)",
+        "date": "2026-05-20",
+        "time": "15:00",
+        "createdAt": "2026-05-12T19:02:53Z"
+    },
+    {
+        "id": 1715529773005,
+        "name": "KKTC Şahadet Hukuku",
+        "date": "2026-05-21",
+        "time": "13:00",
+        "createdAt": "2026-05-12T19:02:53Z"
+    },
+    {
+        "id": 1715529773006,
+        "name": "Eşya Hukuku",
+        "date": "2026-05-22",
+        "time": "17:00",
+        "createdAt": "2026-05-12T19:02:53Z"
+    },
+    {
+        "id": 1715529773007,
+        "name": "Hukuk Sosyolojisi",
+        "date": "2026-05-23",
+        "time": "14:00",
+        "createdAt": "2026-05-12T19:02:53Z"
+    },
+    {
+        "id": 1715529773008,
+        "name": "Antalya Yolculuğu",
+        "date": "2026-05-26",
+        "time": "13:40",
+        "createdAt": "2026-05-12T19:02:53Z"
+    }
+]
