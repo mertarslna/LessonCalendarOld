@@ -43,17 +43,15 @@ const ExamApp = {
 
     initScrollHiding() {
         const nav = document.querySelector('.bottom-nav');
-        let lastScrollY = window.scrollY;
 
         window.addEventListener('scroll', () => {
-            if (window.scrollY > lastScrollY && window.scrollY > 100) {
-                // Scrolling down
+            if (window.scrollY > 20) {
+                // Not at the top
                 nav.classList.add('nav-hidden');
             } else {
-                // Scrolling up
+                // At the top
                 nav.classList.remove('nav-hidden');
             }
-            lastScrollY = window.scrollY;
         }, { passive: true });
     },
 
