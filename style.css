@@ -242,8 +242,15 @@ input:focus {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .exam-card::before {
@@ -346,9 +353,17 @@ input:focus {
     background: rgba(15, 23, 42, 0.4);
 }
 
-.status-urgent { color: var(--accent-light); }
-.status-passed { color: var(--text-muted); }
-.status-ongoing { color: #10b981; }
+.status-urgent {
+    color: var(--accent-light);
+}
+
+.status-passed {
+    color: var(--text-muted);
+}
+
+.status-ongoing {
+    color: #10b981;
+}
 
 /* Views Management */
 .views-wrapper {
@@ -366,8 +381,15 @@ input:focus {
 }
 
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Bottom Navigation */
@@ -423,16 +445,43 @@ input:focus {
     color: var(--text-main);
 }
 
-/* Responsive adjust for bottom nav */
+/* Responsive adjust for mobile */
 @media (max-width: 640px) {
+    .container {
+        padding: 1.5rem 1rem 8rem 1rem;
+        /* Added large bottom padding for nav */
+    }
+
+    .title {
+        font-size: 2.2rem;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+    }
+
+    .glass-card {
+        padding: 1.5rem;
+    }
+
+    .exams-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
     .bottom-nav {
-        bottom: 1rem;
-        width: 90%;
+        bottom: 1.5rem;
+        width: calc(100% - 2rem);
+        max-width: 400px;
         justify-content: space-around;
     }
-    
+
     .nav-item {
         flex: 1;
-        padding: 0.75rem 0.5rem;
+        padding: 0.6rem 0.25rem;
+    }
+
+    .nav-item .nav-label {
+        font-size: 0.6rem;
     }
 }
