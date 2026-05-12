@@ -1,8 +1,3 @@
-/**
- * Exam Calendar - Core Logic
- * Author: Antigravity
- */
-
 const DEFAULT_EXAMS = [
     { id: 101, name: "Medeni Usul Hukuku", date: "2026-05-16", time: "16:00" },
     { id: 102, name: "Şirketler Hukuku", date: "2026-05-17", time: "10:00" },
@@ -84,13 +79,13 @@ const ExamApp = {
     },
 
     loadExams() {
-        // 1. Get from LocalStorage
-        const saved = localStorage.getItem('exam_calendar_data');
+        // Change key to v2 to force a fresh start and avoid old data conflicts
+        const saved = localStorage.getItem('exam_calendar_v2');
         let localExams = saved ? JSON.parse(saved) : [];
 
         // 2. Add default exams if they don't exist
         DEFAULT_EXAMS.forEach(defExam => {
-            if (!localExams.some(local => local.id === defExam.id || (local.name === defExam.name && local.date === defExam.date))) {
+            if (!localExams.some(local => local.id === defExam.id)) {
                 localExams.push({
                     ...defExam,
                     createdAt: new Date().toISOString()
@@ -104,7 +99,7 @@ const ExamApp = {
     },
 
     saveExams() {
-        localStorage.setItem('exam_calendar_data', JSON.stringify(this.exams));
+        localStorage.setItem('exam_calendar_v2', JSON.stringify(this.exams));
         this.updateBadge();
     },
 
