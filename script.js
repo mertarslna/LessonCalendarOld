@@ -6,9 +6,9 @@
 const ExamApp = {
     exams: [],
     
-    init() {
-        this.loadExams();
+    async init() {
         this.cacheDOM();
+        await this.loadExams();
         this.bindEvents();
         this.render();
         this.startTimers();
@@ -72,11 +72,31 @@ const ExamApp = {
         }
     },
 
-    loadExams() {
+    async loadExams() {
+        // 1. Get from LocalStorage
         const saved = localStorage.getItem('exam_calendar_data');
-        this.exams = saved ? JSON.parse(saved) : [];
-        // Sort by date initially
+        let localExams = saved ? JSON.parse(saved) : [];
+
+        // 2. Try to fetch from data.json (Default exams)
+        try {
+            const response = await fetch('data.json');
+            if (response.ok) {
+                const defaultExams = await response.json();
+                
+                // Merge if ID doesn't exist
+                defaultExams.forEach(defExam => {
+                    if (!localExams.some(local => local.id === defExam.id)) {
+                        localExams.push(defExam);
+                    }
+                });
+            }
+        } catch (error) {
+            console.warn('data.json could not be loaded, using local data only.');
+        }
+
+        this.exams = localExams;
         this.sortExams();
+        this.saveExams();
     },
 
     saveExams() {
