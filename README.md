@@ -1,4 +1,4 @@
-# 📅 Exam Calendar
+# 📅 Lesson Calendar
 
 Modern, şık ve kullanıcı dostu bir sınav takip uygulaması. Sınavlarınızı planlayın, geri sayımları takip edin ve hiçbir sınavı kaçırmayın!
 
@@ -23,8 +23,8 @@ Modern, şık ve kullanıcı dostu bir sınav takip uygulaması. Sınavlarınız
 Projeyi yerelinizde çalıştırmak için sadece dosyaları bir tarayıcıda açmanız yeterlidir. Herhangi bir kurulum veya bağımlılık gerektirmez.
 
 ```bash
-git clone https://github.com/mertarslna/ExamCalendar.git
-cd ExamCalendar
+git clone https://github.com/mertarslna/LessonCalendar.git
+cd LessonCalendar
 open index.html
 ```
 
