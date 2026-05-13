@@ -693,6 +693,12 @@ input:focus {
     background: var(--primary-dark);
 }
 
+.fab.fab-hidden {
+    transform: translateY(150%) scale(0.5);
+    opacity: 0;
+    pointer-events: none;
+}
+
 @media (max-width: 640px) {
     .fab {
         bottom: 7.5rem;

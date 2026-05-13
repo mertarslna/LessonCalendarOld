@@ -89,11 +89,14 @@ const App = {
 
     initScrollHiding() {
         const nav = document.querySelector('.bottom-nav');
+        const fab = document.getElementById('main-fab');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 20) {
                 nav.classList.add('nav-hidden');
+                if (fab) fab.classList.add('fab-hidden');
             } else {
                 nav.classList.remove('nav-hidden');
+                if (fab) fab.classList.remove('fab-hidden');
             }
         }, { passive: true });
     },
