@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Calendar | Modern Sınav Takvimi</title>
+    <meta name="description"
+        content="Modern, şık ve kullanışlı sınav takip uygulaması. Geri sayım özelliği ile sınavlarınızı asla kaçırmayın.">
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="container">
+        <header class="header">
+            <h1 class="title">Exam <span>Calendar</span></h1>
+        </header>
+
+        <!-- Views Container -->
+        <div class="views-wrapper">
+            <!-- List View -->
+            <section id="list-view" class="view active">
+                <div class="section-header">
+                    <h2 class="section-title">Yaklaşan Sınavlar</h2>
+                    <div id="exam-count" class="badge">0 Sınav</div>
+                </div>
+                <div id="exams-container" class="exams-grid">
+                    <!-- Sınav kartları buraya gelecek -->
+                    <div id="no-exams" class="empty-state">
+                        <p>Henüz eklenmiş bir sınav bulunmuyor.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lessons View -->
+            <section id="lessons-view" class="view">
+                <div class="section-header">
+                    <h2 class="section-title">Ders Programı</h2>
+                    <div id="current-day-label" class="badge">Pazartesi</div>
+                </div>
+
+                <!-- Day Selector -->
+                <div class="day-selector">
+                    <button class="day-btn active" data-day="1">Pzt</button>
+                    <button class="day-btn" data-day="2">Sal</button>
+                    <button class="day-btn" data-day="3">Çar</button>
+                    <button class="day-btn" data-day="4">Per</button>
+                    <button class="day-btn" data-day="5">Cum</button>
+                    <button class="day-btn" data-day="6">Cmt</button>
+                    <button class="day-btn" data-day="0">Paz</button>
+                </div>
+
+                <div id="lessons-container" class="lessons-list">
+                    <!-- Ders kartları buraya gelecek -->
+                    <div class="empty-state">
+                        <p>Bu gün için ders programı boş.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Add Lesson View -->
+            <section id="add-lesson-view" class="view">
+                <div class="section-header">
+                    <h2 class="section-title">Yeni Ders Ekle</h2>
+                </div>
+                <div class="glass-card">
+                    <form id="lesson-form" class="exam-form">
+                        <div class="form-group">
+                            <label for="lesson-name">Ders Adı</label>
+                            <input type="text" id="lesson-name" placeholder="Örn: Medeni Usul Hukuku" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="lesson-day">Gün</label>
+                                <select id="lesson-day" class="custom-select" required>
+                                    <option value="1">Pazartesi</option>
+                                    <option value="2">Salı</option>
+                                    <option value="3">Çarşamba</option>
+                                    <option value="4">Perşembe</option>
+                                    <option value="5">Cuma</option>
+                                    <option value="6">Cumartesi</option>
+                                    <option value="0">Pazar</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="lesson-room">Derslik / Lokal</label>
+                                <input type="text" id="lesson-room" placeholder="Örn: Amfi 1">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="lesson-start">Başlangıç</label>
+                                <input type="time" id="lesson-start" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lesson-end">Bitiş</label>
+                                <input type="time" id="lesson-end" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lesson-teacher">Öğretim Görevlisi</label>
+                            <input type="text" id="lesson-teacher" placeholder="Örn: Prof. Dr. Ahmet Yılmaz">
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <span class="btn-text">Dersi Kaydet</span>
+                        </button>
+                        <button type="button" class="btn-secondary" id="cancel-lesson">İptal</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Add View (Exams) -->
+            <section id="add-view" class="view">
+                <div class="section-header">
+                    <h2 class="section-title">Yeni Sınav Ekle</h2>
+                </div>
+                <div class="glass-card">
+                    <form id="exam-form" class="exam-form">
+                        <div class="form-group">
+                            <label for="exam-name">Sınav Adı</label>
+                            <input type="text" id="exam-name" placeholder="Örn: Matematik Vize" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="exam-date">Tarih</label>
+                                <input type="date" id="exam-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="exam-time">Saat</label>
+                                <input type="time" id="exam-time" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <span class="btn-text">Sınavı Kaydet</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <!-- FAB for Adding Lesson -->
+        <button class="fab" id="fab-add-lesson" style="display: none;">
+            <span>+</span>
+        </button>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" data-view="list-view">
+            <span class="nav-icon">📅</span>
+            <span class="nav-label">Sınavlarım</span>
+        </button>
+        <button class="nav-item" data-view="lessons-view">
+            <span class="nav-icon">📚</span>
+            <span class="nav-label">Derslerim</span>
+        </button>
+        <button class="nav-item" data-view="add-view">
+            <span class="nav-icon">➕</span>
+            <span class="nav-label">Sınav Ekle</span>
+        </button>
+    </nav>
+
+    <script src="script.js?v=5"></script>
+</body>
+
+</html>
