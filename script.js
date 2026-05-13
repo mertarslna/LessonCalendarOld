@@ -28,8 +28,9 @@ const App = {
         // Lesson specific
         this.dayBtns = document.querySelectorAll('.day-btn');
         this.dayLabel = document.getElementById('current-day-label');
-        this.fabAddLesson = document.getElementById('fab-add-lesson');
+        this.mainFab = document.getElementById('main-fab');
         this.btnCancelLesson = document.getElementById('cancel-lesson');
+        this.btnCancelExam = document.getElementById('cancel-exam');
     },
 
     bindEvents() {
@@ -56,19 +57,30 @@ const App = {
         });
 
         // FAB & Cancel
-        if (this.fabAddLesson) {
-            this.fabAddLesson.addEventListener('click', (e) => {
+        if (this.mainFab) {
+            this.mainFab.addEventListener('click', (e) => {
                 e.preventDefault();
-                console.log('FAB Clicked');
-                const daySelect = document.getElementById('lesson-day');
-                if (daySelect) daySelect.value = this.selectedDay;
-                this.switchView('add-lesson-view');
+                const activeView = Array.from(this.views).find(v => v.classList.contains('active')).id;
+                
+                if (activeView === 'lessons-view') {
+                    const daySelect = document.getElementById('lesson-day');
+                    if (daySelect) daySelect.value = this.selectedDay;
+                    this.switchView('add-lesson-view');
+                } else if (activeView === 'list-view') {
+                    this.switchView('add-view');
+                }
             });
         }
 
         if (this.btnCancelLesson) {
             this.btnCancelLesson.addEventListener('click', () => {
                 this.switchView('lessons-view');
+            });
+        }
+
+        if (this.btnCancelExam) {
+            this.btnCancelExam.addEventListener('click', () => {
+                this.switchView('list-view');
             });
         }
 
@@ -96,9 +108,9 @@ const App = {
         });
 
         // Show/Hide FAB based on view
-        const fab = document.getElementById('fab-add-lesson');
-        if (fab) {
-            fab.style.display = (viewId === 'lessons-view') ? 'flex' : 'none';
+        if (this.mainFab) {
+            const showFab = (viewId === 'lessons-view' || viewId === 'list-view');
+            this.mainFab.style.display = showFab ? 'flex' : 'none';
         }
 
         if (viewId === 'list-view') this.renderExams();
